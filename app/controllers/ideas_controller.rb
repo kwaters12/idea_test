@@ -41,6 +41,13 @@ class IdeasController < ApplicationController
     params.require(:idea).permit([:title, :body, :image])
   end
 
+  def join
+    @idea.save
+    session[:joiners] ||= []
+    session[:joiners] << @user.id
+    redirect_to @idea
+  end
+
   private
 
   def find_idea

@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+  <% vote = current_user.vote_for(idea) || Vote.new %>
+  <% if vote.persisted? && vote.is_up? %>
+    <%= link_to "UnVote", [idea, vote], class: "btn btn-danger", method: :delete %>
+    <br>
+  <% else %>
+    <%= render "/votes/vote_form", vote: vote, idea: idea, is_up: true, label: "Up Vote" %>
+  <% end %>
+  Vote Count: <%= idea.votes_count %>
+  <br>
+  <% if vote.persisted? && vote.is_down? %>
+    <%= link_to "UnVote", [idea, vote], class: "btn btn-danger", method: :delete %>
+  <% else %>
+    <%= render "/votes/vote_form", vote: vote, idea: idea, is_up: false, label: "Down Vote" %>
+  <% end %>
+
+<% end %>
+<br>
+<br>

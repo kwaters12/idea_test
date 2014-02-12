@@ -8,8 +8,20 @@ class Idea < ActiveRecord::Base
 
   has_many :votes
 
+  has_many :joins, dependent: :destroy
+  has_many :users, through: :joins
+  has_many :joiners, through: :joins, source: :user
+
   def update_vote_count
     self.votes_count = votes.up.count - votes.down.count
     save
+  end
+
+  def join_by user
+    joiners << user 
+  end
+
+  def unjoin_by user
+    joiners.delete(user) 
   end
 end
