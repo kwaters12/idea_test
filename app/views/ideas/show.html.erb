@@ -1,0 +1,45 @@
+<div class="idea-box">
+  <h1><strong>Idea: </strong><%= @idea.title %></h1>
+  <%= image_tag @idea.image(:medium) %>
+  <p><strong>Description: </strong><%= @idea.body %></p>
+
+<% if @discussion.errors.any? %>
+    <ul>
+      <% @discussion.errors.messages.values.each do |msg| %>
+      <li><%= msg.join " " %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<%= form_for [@idea, @discussion] do |f| %>
+    <div class="form-group">
+      <%= f.label :title, "Enter New discussion:" %>
+      <br>
+      <%= f.text_field :title, class: "form-control" %>
+      
+      <br>
+      <%= f.text_area :body, class: "form-control"  %>
+    </div>
+    <%= f.submit class: "btn btn-default" %>
+<% end %>
+
+<hr>
+  <h2>Discussions:</h2>
+  <% @idea.discussions.each do |discussion| %>
+    <h3><%= link_to "#{discussion.title}", idea_discussion_path(@idea, discussion) %></h3>
+    <%= discussion.body %>
+
+    <br>
+    <br>
+
+      <%= link_to "Delete Discussion", [@idea, discussion], method: :delete, data: {confirm: "Are you sure you want to delete this answer?"}, class: "btn btn-default" %>    
+      <%= link_to "Edit Discussion", edit_idea_discussion_path(@idea, discussion), class: "btn btn-default" %>
+
+
+    
+
+  <% end %>
+
+
+
+

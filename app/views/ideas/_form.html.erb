@@ -1,0 +1,29 @@
+<%= form_for @idea do |f| %> 
+  <% if @idea.errors.any? %>
+    <ul class="alert_message">
+      <% @idea.errors.messages.values.each do |message| %>      
+      <li><%= message.join "," %></li>
+      <% end %>
+    </ul>
+
+  <% end %>
+  <div class="form-group">
+  <%= f.label :title, "Best Idea Yet:" %>
+  <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <br>  
+
+  <div class="form-group">
+    <%= f.label :body, "Project Description" %>
+    <%= f.text_area :body, class: "form-control" %>
+    <br>
+  </div>    
+
+  
+  <%= f.file_field :image, class: "btn btn-default" %>
+  
+
+  <%= f.submit "Submit", class: "btn btn-default" %>
+  <%= link_to "Back", ideas_path, class: "btn btn-default" %>
+
+<% end %>
