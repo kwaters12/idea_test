@@ -13,6 +13,7 @@ class DiscussionsController < ApplicationController
     @discussion.idea = @idea
     @discussion.user = current_user
     if @discussion.save
+      DiscussionMailer.notify_owner(@discussion).deliver
       redirect_to @idea, notice: "Thanks for your contribution!"
     else
       render "ideas/show"

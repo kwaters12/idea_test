@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :ideas
   has_many :discussions
 
+  has_many :votes
+
 
   def name_display
     if first_name || last_name

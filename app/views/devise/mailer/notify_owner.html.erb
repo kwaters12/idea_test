@@ -1,0 +1,5 @@
+<p>Hello <%= @receiving_user.name_display %>,</p>
+<p><%= @sending_user.name_display.capitalize %> has added a discussion to your idea: <%= link_to, @idea.title, @discussion_url = @idea %></p>
+<p>The comment is: <%= @discussion.body %></p>
+<p>Regards,</p>
+<p>Idea Space Ltd.</p>

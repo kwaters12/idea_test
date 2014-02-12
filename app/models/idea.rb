@@ -3,5 +3,13 @@ class Idea < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   has_many :discussions
+
   belongs_to :user
+
+  has_many :votes
+
+  def update_vote_count
+    self.votes_count = votes.up.count - votes.down.count
+    save
+  end
 end
